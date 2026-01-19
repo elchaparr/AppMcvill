@@ -11,7 +11,7 @@ workflows:
         - app_store_credentials
 
     scripts:
-      - name: Install .NET SDK
+      - name: Install .NET 9 SDK
         script: |
           brew install dotnet-sdk@8
           dotnet --version
