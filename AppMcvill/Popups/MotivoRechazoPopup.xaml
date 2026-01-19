@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="AppMcvill.Popups.MotivoRechazoPopup">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Motivo del rechazo"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <!-- Opciones -->
+        <RadioButton Content="Presupuesto insuficiente"
+                     GroupName="Motivo"
+                     CheckedChanged="OnChecked"/>
+
+        <RadioButton Content="Producto/servicio no disponible"
+                     GroupName="Motivo"
+                     CheckedChanged="OnChecked"/>
+
+        <RadioButton Content="Información incompleta o incorrecta"
+                     GroupName="Motivo"
+                     CheckedChanged="OnChecked"/>
+
+        <RadioButton Content="Sobre stock de materiales"
+             GroupName="Motivo"
+             CheckedChanged="OnChecked"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Cancelar"
+                    Clicked="OnCancel"
+                    BackgroundColor="Transparent"
+                    TextColor="Red"/>
+
+            <Button Text="Aceptar"
+                    BackgroundColor="Transparent"
+                    TextColor="#FF0C5896"
+                    Clicked="OnAccept"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</toolkit:Popup>

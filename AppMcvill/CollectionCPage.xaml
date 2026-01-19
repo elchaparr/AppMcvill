@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMcvill.CollectionCPage"
+             Title="Rechazadas">
+    <Grid>
+
+        <Image 
+        Source="fondodepantalla.png" 
+        Aspect="AspectFill"
+        Opacity="0.6" 
+        InputTransparent="True"/>
+        <ScrollView>
+            <VerticalStackLayout Padding="15" Spacing="15">
+
+
+                <Label 
+                Text="Requisiciones Rechazadas"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#FF0C5896"
+                HorizontalOptions="Center"
+                Margin="0,10"/>
+                <Grid ColumnDefinitions="*,*">
+                    <Image Source="filter.png"
+                            WidthRequest="25"
+                            HeightRequest="25"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Grid.Column="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Filtros"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image Source="excel.png"
+                            WidthRequest="25"
+                            HeightRequest="25"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Grid.Column="1">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Excel"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+
+                <CollectionView x:Name="RequisicionesList"
+                            ItemsSource="{Binding Requisiciones}"
+                            SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border 
+                            Stroke="#FF000000"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="#FFFFFF" Padding="15"
+                            Shadow="Medium"
+                            Margin="0,5">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnBorderTappedc" />
+                                </Border.GestureRecognizers>
+
+                                <Grid 
+                                RowDefinitions="Auto, Auto, Auto"
+                                ColumnDefinitions="*, Auto"
+                                RowSpacing="10"
+                                ColumnSpacing="10">
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0"  Spacing="8">
+                                        <Label Text="{Binding MaterialFormatted}"
+                                            FontSize="18"
+                                            FontAttributes="Bold"
+                                            TextColor="#FF0C5896"
+                                            LineBreakMode="WordWrap"
+                                            MaxLines="2" />
+
+                                        <Label Text="{Binding Descripcion}" FontSize="14" TextColor="#FF000000" LineBreakMode="WordWrap"/>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="4" VerticalOptions="Center">
+
+                                        <Border BackgroundColor="#FF0C5896"
+                                            StrokeShape="RoundRectangle 6"
+                                            Padding="3,3"
+                                            VerticalOptions="Center">
+                                            <Label Text="{Binding Cantidad, StringFormat='{}{0:F2}'}"
+                                               FontSize="24"
+                                               FontAttributes="Bold"
+                                               TextColor="#FAFAFA"
+                                               HorizontalOptions="Center" />
+                                        </Border>
+
+                                        <!-- Label debajo -->
+                                        <Label Text="{Binding UM, StringFormat=' {0}'}"
+                                        FontSize="14"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center" />
+
+                                    </VerticalStackLayout>
+
+
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="#FF000000" Margin="0,3,0,3"/>
+
+                                    <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="50" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding IdRequisicion, StringFormat='ID: {0}'}" FontSize="12" TextColor="#FF000000"/>
+                                        <Label Text="{Binding Linea, StringFormat='Línea: {0}'}" FontSize="12" TextColor="#FF000000" HorizontalOptions="EndAndExpand"/>
+                                    </HorizontalStackLayout>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

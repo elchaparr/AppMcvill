@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AppMcvill.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AppMcvill"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutWidth="250"
+    BackgroundColor="#fcfbf9">
+
+    <!-- MENU PERSONALIZADO -->
+    <Shell.FlyoutContent>
+        <ScrollView>
+            <VerticalStackLayout Padding="15" Spacing="12">
+
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                    <Image Source="gear.png"
+                            WidthRequest="20"
+                            HeightRequest="20"
+                            VerticalOptions="Center" />
+
+                    <Button x:Name="ReqButton"
+                            Text="Requisiciones"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="#212121"
+                            HorizontalOptions="Start"
+                            Padding="0"
+                            Clicked="OnToggleRequisiciones"/>
+
+                </HorizontalStackLayout>
+                
+                <!-- SUBMENÚ -->
+                <VerticalStackLayout
+                    x:Name="ReqSubMenu"
+                    IsVisible="False"
+                    Padding="20,0,0,0"
+                    Spacing="8">
+                    
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                        <Image Source="file.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center" />
+                        <Button 
+                        Text="Requisiciones de Material"
+                        BackgroundColor="Transparent"
+                        TextColor="#212121"
+                        HorizontalOptions="Start"
+                        Padding="0"
+                        FontSize="12"
+                        Clicked="OnNavigateReqA"/>
+                    </HorizontalStackLayout>
+                    
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                        <Image Source="filecheck.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center" />
+                        <Button 
+                        Text="Requisiciones Aceptadas"
+                        BackgroundColor="Transparent"
+                        TextColor="#212121"
+                        HorizontalOptions="Start"
+                        Padding="0"
+                        FontSize="12"
+                        Clicked="OnNavigateReqB"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        
+                        <Image Source="filexmark.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center" />
+                        
+                        <Button 
+                            Text="Requisiciones Rechazadas"
+                            BackgroundColor="Transparent"
+                            TextColor="#212121"
+                            HorizontalOptions="Start"
+                            Padding="0"
+                            FontSize="12"
+                            Clicked="OnNavigateReqC"/>
+                    </HorizontalStackLayout>
+                    
+                </VerticalStackLayout>
+                <!-- otro -->
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                    <Image Source="gear.png"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        VerticalOptions="Center" />
+
+                    <Button x:Name="ReqButtonn"
+                            Text="Proximos modulos"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="#212121"
+                            HorizontalOptions="Start"
+                            Padding="0"
+                            Clicked="OnToggleOtrosModulos"/>
+
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout x:Name="ReqSubMenuu"
+                                        IsVisible="False"
+                                        Padding="20,0,0,0"
+                                        Spacing="8">
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                        <Image Source="arrows.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center" />
+                        
+                        <Button Text="Modulo Nuevo"
+                                BackgroundColor="Transparent"
+                                TextColor="#212121"
+                                HorizontalOptions="Start"
+                                Padding="0"
+                                FontSize="12"
+                                Clicked="OnNavigateModNu"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                        <Image Source="arrows.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center"/>
+                        
+                        <Button Text="Nuevo Modulo 2"
+                                BackgroundColor="Transparent"
+                                TextColor="#212121"
+                                HorizontalOptions="Start"
+                                Padding="0"
+                                FontSize="12"
+                                Clicked="OnNavigateModNu2"/>
+                    </HorizontalStackLayout>
+                    
+
+                </VerticalStackLayout>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </Shell.FlyoutContent>
+
+
+    <!-- PÁGINA DE INICIO -->
+    <ShellContent
+        Title="Inicio"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+
+    <!-- NO SALEN EN MENÚ — SOLO SE USAN PARA NAVEGAR -->
+    <ShellContent Route="CollectionA" ContentTemplate="{DataTemplate local:SegundaPantalla}" />
+    <ShellContent Route="ReqA" Title="Requisiciones" ContentTemplate="{DataTemplate local:CollectionAPage}" />
+    <ShellContent Route="ReqB" ContentTemplate="{DataTemplate local:CollectionBPage}" />
+    <ShellContent Route="ReqC" ContentTemplate="{DataTemplate local:CollectionCPage}" />
+
+
+    <!-- FOOTER -->
+    <Shell.FlyoutFooter>
+        <Grid Padding="10" ColumnDefinitions="Auto, *" VerticalOptions="Center">
+
+            <Image
+                Source="signout.png"
+                WidthRequest="20"
+                HeightRequest="20"
+                VerticalOptions="Center" />
+
+            <Button
+                Grid.Column="1"
+                Text="Cerrar Sesión"
+                Clicked="OnLogoutClicked"
+                BackgroundColor="Transparent"
+                TextColor="#212121"
+                HorizontalOptions="Start"
+                FontAttributes="Bold"
+                Padding="5"
+                FontSize="14" />
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

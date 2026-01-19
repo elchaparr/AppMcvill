@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="AppMcvill.CollectionAPage"
+             Title="Requisiciones">
+
+
+    <Grid RowDefinitions="Auto,*"
+      RowSpacing="10">
+        <Image 
+        Source="fondodepantalla.png" 
+        Aspect="AspectFill"
+        Opacity="0.6" 
+        InputTransparent="True"
+        Grid.RowSpan="2"
+       />
+        <Label 
+        Text="Requisiciones de Materiales"
+        FontSize="24"
+        FontAttributes="Bold"
+        TextColor="#FF0C5896"
+        HorizontalOptions="Center"
+        Margin="0,10"
+        Grid.Row="0"
+        />
+        <ScrollView Grid.Row="1" >
+            <VerticalStackLayout Padding="15" Spacing="15">
+
+                <Grid Padding="10" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto">
+
+                    <!-- Botón a la izquierda -->
+                    <Image Source="filter.png"
+                           WidthRequest="25"
+                           HeightRequest="25"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Grid.Column="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Filtros"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <!-- Barra de búsqueda en el centro -->
+                    <SearchBar x:Name="txtBuscar"
+                               Grid.Column="1"
+                               Placeholder="Buscar ..."
+                               PlaceholderColor="Gray"
+                               TextColor="Black"
+                               Margin="20,0"
+                               TextChanged="Busqueda"
+                               VerticalOptions="Center"
+                               Visual="Material"/>
+
+                </Grid>
+
+
+                <CollectionView x:Name="RequisicionesList"
+                                ItemsSource="{Binding Requisiciones}"
+                                SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border 
+                                Stroke="#FF000000"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="#FFFFFF" Padding="15"
+                                Shadow="Medium"
+                                Margin="0,5">
+
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnBorderTapped" />
+                                </Border.GestureRecognizers>
+
+
+                                <Grid 
+                                    RowDefinitions="Auto, Auto, Auto"
+                                    ColumnDefinitions="*, Auto"
+                                    RowSpacing="10"
+                                    ColumnSpacing="10">
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0"  Spacing="8">
+                                        <Label Text="{Binding MaterialFormatted}"
+                                                FontSize="18"
+                                                FontAttributes="Bold"
+                                                TextColor="#FF0C5896"
+                                                LineBreakMode="WordWrap"
+                                                MaxLines="2" />
+
+                                        <Label Text="{Binding DescriptionFormatted}" FontSize="14" TextColor="#FF000000" LineBreakMode="WordWrap"/>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="4" VerticalOptions="Center">
+
+                                        <Border BackgroundColor="#FF0C5896"
+                                                StrokeShape="RoundRectangle 6"
+                                                Padding="3,3"
+                                                VerticalOptions="Center">
+                                            <Label Text="{Binding Cantidad, StringFormat='{}{0:F2}'}"
+                                                   FontSize="24"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FAFAFA"
+                                                   HorizontalOptions="Center" />
+                                        </Border>
+
+                                        <!-- Label debajo -->
+                                        <Label Text="{Binding UM, StringFormat=' {0}'}"
+                                            FontSize="14"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center" />
+
+                                    </VerticalStackLayout>
+
+
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="#FF000000" Margin="0,3,0,3"/>
+
+                                    <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="50" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding IdRequisicion, StringFormat='ID: {0}'}" FontSize="12" TextColor="#FF000000"/>
+                                        <Label Text="{Binding Linea, StringFormat='Línea: {0}'}" FontSize="12" TextColor="#FF000000"/>
+                                        <Label Text="{Binding Tipo, StringFormat='Tipo: {0}'}" FontSize="12" TextColor="#FF000000" IsVisible="False"/>
+                                    </HorizontalStackLayout>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMcvill.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#FF0C5896"/>
+                <GradientStop Offset="1" Color="#FF000000"/>
+            </GradientStopCollection>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="30,0,20,30" Spacing="0">
+
+                <!-- Botón para cambiar idioma -->
+                <!--<Image  x:Name="CambiodeIdioma"
+                        Source="earth.svg"
+                        WidthRequest="25"
+                        HeightRequest="45"
+                        Aspect="AspectFit"
+                        HorizontalOptions="End"
+                        Margin="0,0,0,-140">
+                    
+                </Image>-->
+
+                <!-- Logo -->
+                <Image Source="logo.png"
+                       HeightRequest="350"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,10"/>
+
+                <!-- Título dinámico -->
+                <Label x:Name="LoginTitleLabel"
+                       Text="Iniciar Sesion"
+                       FontSize="28"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       Margin="0,-60,0,25"/>
+
+                <!-- Icono usuario -->
+                <Image Source="user.svg"
+                       WidthRequest="25"
+                       HeightRequest="45"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Start"/>
+
+                <!-- Campo Usuario -->
+                <Border Stroke="White" StrokeShape="RoundRectangle 120" Margin="0,0,0,10">
+                    <Grid ColumnDefinitions="Auto,*" HeightRequest="45" Padding="10,0">
+                        <!-- Ícono usuario -->
+                       
+
+                        <!-- Entry usuario -->
+                        <Entry x:Name="UsernameEntry"
+                               Placeholder="Usuario"
+                               TextColor="White"
+                               PlaceholderColor="White"
+                               BackgroundColor="Transparent"
+                               Grid.Column="1"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+                
+                <Image Source="unlock.svg"
+                        WidthRequest="25"
+                        HeightRequest="45"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Start"
+                        Margin="0, 20, 0, 0"/>
+                
+                <!-- Campo Contraseña -->
+                <Border Stroke="White" StrokeShape="RoundRectangle 120" Margin="0,0,0,30">
+                    <Grid ColumnDefinitions="*,Auto" HeightRequest="45" Padding="10,10">
+                        <!-- Entry contraseña -->
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Contraseña"
+                               IsPassword="True"
+                               TextColor="White"
+                               PlaceholderColor="White"
+                               BackgroundColor="Transparent"
+                               HeightRequest="45"
+                               Grid.Column="0"/>
+
+                        <!-- Ícono mostrar/ocultar contraseña -->
+                        <Image x:Name="PasswordToggleIcon"
+                               Source="eye_slash.svg"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Aspect="AspectFit"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="0,0,10,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTogglePasswordVisibility"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <!-- Botón de Login -->
+                <Button x:Name="LoginButton"
+                        Text="Ingresar"
+                        FontSize="16"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        WidthRequest="190"
+                        CornerRadius="50"
+                        Clicked="OnLoginClicked"
+                        Margin="0,45,0,30"/>
+
+                <Button Text="No tienes cuenta"
+                        BackgroundColor="Transparent"
+                        TextColor="#FFFFFF"
+                        HorizontalOptions="Start"
+                        Padding="0"
+                        FontSize="12"
+                        Clicked="CrearUsuCon"
+                        Margin="130, -10, 0, 0"/>
+                
+                <!-- Texto inferior -->
+                <HorizontalStackLayout>
+                    <Label Text="© Copyright - mcvill"
+                           FontSize="12"
+                           TextColor="White"
+                           Opacity="0.8"
+                           HorizontalOptions="Center" 
+                           Margin="250, 70, 100 , -5"/>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

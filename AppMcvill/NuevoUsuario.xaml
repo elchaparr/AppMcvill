@@ -1,0 +1,86 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMcvill.NuevoUsuario"
+             Title="NuevoUsuario">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#FF0C5896"/>
+                <GradientStop Offset="1" Color="#FF000000"/>
+            </GradientStopCollection>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, Auto, *">
+
+        <!-- Imagen -->
+        <Image Source="logo.png"
+               HeightRequest="180"
+               HorizontalOptions="Center"
+               Grid.Row="0"
+               Margin="0,10"/>
+
+        <!-- Título -->
+        <Label Text="Crea tu cuenta"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Grid.Row="1"
+               Margin="0,-40,0,10"/>
+
+        <!-- Contenido principal -->
+        <Grid Grid.Row="2">
+            <RoundRectangle CornerRadius="40,40,0,0"
+                            Fill="White"
+                            Margin="0"/>
+
+            <StackLayout Padding="20" Spacing="25">
+
+                <Label Text="Usuario"
+                       TextColor="#0C5896"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       Margin="0,50,0,0"/>
+
+                <Entry x:Name="UsernameEntryy"
+                       Placeholder="Número del trabajador"
+                       Keyboard="Numeric" />
+
+                <Label Text="Contraseña"
+                       TextColor="#0C5896"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+
+                <Grid>
+                    <Entry x:Name="PasswordEntryy"
+                           Placeholder="Contraseña"
+                           IsPassword="True"
+                           HorizontalOptions="FillAndExpand"/>
+
+                    <Image x:Name="PasswordToggleIcon"
+                           Source="eyeslashnu.png"
+                           WidthRequest="25"
+                           HeightRequest="25"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="0,0,10,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTogglePasswordVisibility"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <Button Text="Crear cuenta"
+                        BackgroundColor="#0C5896"
+                        TextColor="White"
+                        CornerRadius="50"
+                        HeightRequest="50"
+                        Clicked="CreateUser"/>
+
+            </StackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

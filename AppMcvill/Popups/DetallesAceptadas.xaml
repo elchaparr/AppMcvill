@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="AppMcvill.Popups.DetallesAceptadas"
+    Color="#80000000">
+
+    <Border
+        Stroke="#FF000000"
+        BackgroundColor="White"
+        Padding="30"
+        StrokeShape="RoundRectangle 12"
+        WidthRequest="550"
+        MaximumHeightRequest="700">
+        <Grid RowDefinitions="Auto,*,Auto">
+
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Requisición Aceptada"
+                       FontAttributes="Bold"
+                       FontSize="20"/>
+
+                    <HorizontalStackLayout>
+                        <Label Text="Autorizo : "
+                       FontAttributes="Bold"
+                       FontSize="16"/>
+                        <Label x:Name="UsuarioLabel"
+                        FontSize="16"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Margin="0,0,0,0">
+                        <Grid Padding="0" ColumnDefinitions="Auto, Auto, 100,Auto, Auto">
+
+                            <Label Text="Linea : " 
+                                    FontAttributes="Bold" 
+                                    FontSize="16" 
+                                    HorizontalOptions="Start" 
+                                    Grid.Column="0"/>
+
+
+                            <Label x:Name="Linealabel" 
+                                    Text="Id" 
+                                    FontSize="16" 
+                                    Grid.Column="1"/>
+
+                            <Label Text="Requisición : " 
+                                   FontAttributes="Bold" 
+                                   FontSize="16" 
+                                   HorizontalOptions="End" 
+                                   Grid.Column="3"/>
+
+                            <Label  x:Name="IdLabel"
+                                    Text="255585364" 
+                                    FontSize="16" 
+                                    Grid.Column="4"/>
+
+                        </Grid>
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="0.5"
+                                Color="#A9A9A9"/>
+
+                    <Label Text="Material :" FontAttributes="Bold" FontSize="16"/>
+                    <Label x:Name="MaterialLabel" FontSize="16"/>
+
+                    <Label Text="Descripción :" FontAttributes="Bold" FontSize="16"/>
+                    <Label x:Name="DescripcionLabel" FontSize="16"/>
+
+                    <Label Text="Unidad de Medida :" FontAttributes="Bold" FontSize="16"/>
+                    <Label x:Name="UMLabel" FontSize="16"/>
+
+                    <BoxView Grid.ColumnSpan="4" Grid.Row="2" HeightRequest="0.5" Color="#A9A9A9" Margin="0,0,0,0"/>
+
+
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <CollectionView Grid.Row="1"
+                            ItemsSource="{Binding Detalles}"
+                            SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10" RowSpacing="8" Padding="5">
+
+                            <!-- Definiciones de columnas -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Definiciones de filas -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Cotización -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Encabezados fila 1 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Valores fila 1 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Encabezados fila 2 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Valores fila 2 -->
+                                <RowDefinition Height="1"/>
+                                <!-- Separador -->
+                            </Grid.RowDefinitions>
+
+                            <!-- Cotización -->
+                            <Label Text="Cotización :" FontAttributes="Bold" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding Cotizacion}" FontAttributes="Bold" FontSize="16" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+                            <!-- Encabezados fila 1 -->
+                            <Label Text="Proveedor" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                            <Label Text="Marca" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"/>
+                            <Label Text="Precio" FontAttributes="Bold" Grid.Row="1" Grid.Column="2"/>
+
+                            <!-- Valores fila 1 -->
+                            <Label Text="{Binding Proveedor}" Grid.Row="2" Grid.Column="0"/>
+                            <Label Text="{Binding Marca}" Grid.Row="2" Grid.Column="1"/>
+                            <Label Text="{Binding Precio, StringFormat='${0:N2}'}" Grid.Row="2" Grid.Column="2"/>
+
+                            <!-- Encabezados fila 2 -->
+                            <Label Text="Cantidad" Margin="0,5,0,0" FontAttributes="Bold" Grid.Row="3" Grid.Column="0"/>
+                            <Label Text="Cantidad Sugerida" Margin="0,5,0,0" FontAttributes="Bold" Grid.Row="3" Grid.Column="1"/>
+                            <Label  Text="{Binding EstadoEncabezado}" Margin="0,5,0,0" FontAttributes="Bold" Grid.Row="3" Grid.Column="2"/>
+
+                            <!-- Valores fila 2 -->
+                            <Label Text="{Binding Cantidad}"  Margin="0,-5,0,0" VerticalOptions="Center" Grid.Row="4" Grid.Column="0"/>
+                            <Label Text="{Binding CantidadSugerida}" Grid.Row="4" Grid.Column="1" Margin="0,0,13,0"/>
+
+                            <Image Source="{Binding ImagenAceptada}"
+                                   WidthRequest="25"
+                                   HeightRequest="25"
+                                   HorizontalOptions="Center"
+                                   Margin="0,-5,0,0"
+                                   Grid.Row="4" Grid.Column="2"/>
+
+
+                            <!-- Separador -->
+                            <BoxView Grid.Row="5" Grid.ColumnSpan="3" HeightRequest="1" Color="#A9A9A9"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <HorizontalStackLayout Grid.Row="2"
+                   Padding="0,15,0,8"
+                   HorizontalOptions="Start">
+                <Button Text="CANCELAR"
+                        Clicked="OnCloseClicked"
+                        BackgroundColor="White"
+                        BorderColor="Gray"
+                        BorderWidth="2"
+                        TextColor="Gray"
+                        FontAttributes="Bold"
+                        FontSize="12"/>
+            </HorizontalStackLayout>
+
+        </Grid>
+
+    </Border>
+
+</toolkit:Popup>
