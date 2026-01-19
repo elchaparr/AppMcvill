@@ -6,19 +6,21 @@ workflows:
 
     environment:
       xcode: latest
-      groups:
-        - keystore_credentials
-        - app_store_credentials
+      vars:
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+        DOTNET_CLI_TELEMETRY_OPTOUT: "true"
 
     scripts:
-      - name: Install .NET 9 SDK
+      - name: Install .NET 8 SDK
         script: |
           brew install dotnet-sdk@8
+          export DOTNET_ROOT="$(brew --prefix)/opt/dotnet@8/libexec"
+          export PATH="$DOTNET_ROOT:$PATH"
           dotnet --version
 
-      - name: Install MAUI workload
+      - name: Install MAUI workload (user local)
         script: |
-          dotnet workload install maui
+          dotnet workload install maui --skip-sign-check
 
       - name: Restore dependencies
         script: |
@@ -27,17 +29,17 @@ workflows:
       # -------- ANDROID --------
       - name: Build Android
         script: |
-          dotnet publish AppMcvill.csproj \
+          dotnet publish YourProjectName.csproj \
             -c Release \
-            -f net9.0-android \
+            -f net8.0-android \
             /p:AndroidPackageFormat=aab
 
       # -------- iOS --------
       - name: Build iOS
         script: |
-          dotnet publish AppMcvill.csproj \
+          dotnet publish YourProjectName.csproj \
             -c Release \
-            -f net9.0-ios \
+            -f net8.0-ios \
             /p:RuntimeIdentifier=ios-arm64
 
     artifacts:
