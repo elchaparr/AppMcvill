@@ -1,0 +1,56 @@
+workflows:
+  maui-android-ios:
+    name: .NET MAUI Android & iOS
+    max_build_duration: 90
+    instance_type: mac_mini_m1
+
+    environment:
+      vars:
+        DOTNET_VERSION: "8.0"
+      xcode: latest
+
+      # Grupos de credenciales (se configuran en Codemagic UI)
+      groups:
+        - keystore_credentials       # Android
+        - app_store_credentials     # iOS
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+
+    scripts:
+      - name: Check .NET version
+        script: |
+          dotnet --version
+
+      - name: Install MAUI workloads
+        script: |
+          dotnet workload install maui android ios
+
+      - name: Restore dependencies
+        script: |
+          dotnet restore
+
+      # ---------- ANDROID ----------
+      - name: Build Android
+        script: |
+          dotnet publish AppMcvill.csproj \
+            -c Release \
+            -f net9.0-android \
+            /p:AndroidPackageFormat=aab
+
+      # ---------- iOS ----------
+      - name: Build iOS
+        script: |
+          dotnet publish AppMcvill.csproj \
+            -c Release \
+            -f net9.0-ios \
+            /p:RuntimeIdentifier=ios-arm64
+
+    artifacts:
+      - "**/*.aab"
+      - "**/*.apk"
+      - "**/*.ipa"
