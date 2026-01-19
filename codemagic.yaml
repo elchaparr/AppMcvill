@@ -5,25 +5,15 @@ workflows:
     instance_type: mac_mini_m1
 
     environment:
-      vars:
-        DOTNET_VERSION: "9.0"
       xcode: latest
-
-      # Grupos de credenciales (se configuran en Codemagic UI)
       groups:
-        - keystore_credentials       # Android
-        - app_store_credentials     # iOS
-
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: main
-          include: true
+        - keystore_credentials
+        - app_store_credentials
 
     scripts:
-      - name: Check .NET version
+      - name: Install .NET SDK
         script: |
+          brew install dotnet-sdk
           dotnet --version
 
       - name: Install MAUI workloads
