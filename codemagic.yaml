@@ -13,18 +13,18 @@ workflows:
     scripts:
       - name: Install .NET SDK
         script: |
-          brew install dotnet-sdk
+          brew install dotnet-sdk@8
           dotnet --version
 
-      - name: Install MAUI workloads
+      - name: Install MAUI workload
         script: |
-          dotnet workload install maui android ios
+          dotnet workload install maui
 
       - name: Restore dependencies
         script: |
           dotnet restore
 
-      # ---------- ANDROID ----------
+      # -------- ANDROID --------
       - name: Build Android
         script: |
           dotnet publish AppMcvill.csproj \
@@ -32,7 +32,7 @@ workflows:
             -f net9.0-android \
             /p:AndroidPackageFormat=aab
 
-      # ---------- iOS ----------
+      # -------- iOS --------
       - name: Build iOS
         script: |
           dotnet publish AppMcvill.csproj \
